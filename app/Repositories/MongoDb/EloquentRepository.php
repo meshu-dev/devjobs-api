@@ -64,7 +64,8 @@ abstract class EloquentRepository implements Repository
      */
     public function readAll(array $params = [])
     {
-        $rows = $this->model->get();
+        $params = $this->model->verifySearchable($params);
+        $rows = $this->model->where($params)->get();
 
         if (empty($rows) === false) {
             return $rows;

@@ -9,4 +9,7 @@ class JobSiteModel extends BaseModel
     	'url',
     	'searchParams'
     ];
+    protected $searchable = [
+    	'name'
+    ];
 }
