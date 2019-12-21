@@ -1,10 +1,14 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Repositories\MongoDb\JobRepository;
+
+use Illuminate\Http\Request;
+
 /**
  * A default class used primarmly for the REST API default path.
  */
-class JobController
+class JobController extends Controller
 {
     /**
      * The constructor for this class.
@@ -14,7 +18,7 @@ class JobController
      */
     public function __construct(JobRepository $jobRepository)
     {
-        $this->jobRepository = $jobRepository;
+        $this->repository = $jobRepository;
     }
 
     /**
@@ -27,14 +31,9 @@ class JobController
     public function create(Request $request)
     {
         $params = $request->all();
-        $validationResult = $this->validator->validateCreate($params);
+        $row = $this->repository->create($params);
 
-        if ($validationResult !== true) {
-            return $this->getResponse($validationResult, false);
-        }
-        $result = $this->repository->create($params);
-
-        return $this->getResponse([$this->rowName => $result]);
+        return $this->getResponse($row, 201);
     }
 
     /**
@@ -45,16 +44,11 @@ class JobController
      *
      * @return Illuminate\Http\JsonResponse
      */
-    public function read(Request $request, int $id)
+    public function read(Request $request, string $id)
     {
-        $validationResult = $this->validator->checkIdExists($id);
+        $row = $this->repository->read($id);
 
-        if ($validationResult !== true) {
-            return $this->getResponse($validationResult, false);
-        }
-        $result = $this->repository->read($id);
-
-        return $this->getResponse([$this->rowName => $result]);
+        return $this->getResponse($row);
     }
 
     /**
@@ -67,9 +61,9 @@ class JobController
     public function readAll(Request $request)
     {
         $params = $request->all();
-        $result = $this->repository->readAll($params);
+        $rows = $this->repository->readAll($params);
 
-        return $this->getResponse([$this->listName => $result]);
+        return $this->getResponse($rows);
     }
 
     /**
@@ -80,17 +74,12 @@ class JobController
      *
      * @return Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, string $id)
     {
         $params = $request->all();
-        $validationResult = $this->validator->validateUpdate($id, $params);
+        $row = $this->repository->update($id, $params);
 
-        if ($validationResult !== true) {
-            return $this->getResponse($validationResult, false);
-        }
-        $result = $this->repository->update($id, $params);
-
-        return $this->getResponse([$this->rowName => $result]);
+        return $this->getResponse($row);
     }
 
     /**
@@ -101,15 +90,11 @@ class JobController
      *
      * @return Illuminate\Http\JsonResponse
      */
-    public function delete(Request $request, int $id)
+    public function delete(Request $request, string $id)
     {
-        $validationResult = $this->validator->checkIdExists($id);
-
-        if ($validationResult !== true) {
-            return $this->getResponse($validationResult, false);
-        }
         $result = $this->repository->delete($id);
+        $statusCode = empty($result) === false ? '204' : '404';
 
-        return $this->getResponse(['is_deleted' => $result]);
+        return $this->getResponse([], $statusCode);
     }
 }

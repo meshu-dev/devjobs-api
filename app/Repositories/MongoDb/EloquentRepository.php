@@ -2,7 +2,7 @@
 namespace App\Repositories\MongoDb;
 
 use App\Interfaces\Repository;
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
 /**
  * Used to perform CRUD operations on JSON data files.
@@ -16,7 +16,7 @@ abstract class EloquentRepository implements Repository
      *
      * @param Model $model Used to get and set data.
      */
-    public function __construct(Model $model)
+    public function __construct(Eloquent $model)
     {
         $this->model = $model;
     }
@@ -82,7 +82,7 @@ abstract class EloquentRepository implements Repository
      */
     public function update($id, array $params)
     {
-        $row = $this->model->where($this->model->primaryKey, '=', $id)->update($params);
+        $row = $this->model->where($this->model->getIdField(), '=', $id)->update($params);
 
         if (empty($row) === false) {
             return $row;

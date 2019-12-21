@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 /**
  * A default class used primarmly for the REST API default path.
  */
-class IndexController
+class IndexController extends Controller
 {
     /**
      * Return the current server timestamp.
@@ -13,6 +13,6 @@ class IndexController
      */
     public function index()
     {
-        return response()->json(['time' => time()], 200);
+    	return $this->getResponse(['time' => time()]);
     }
 }

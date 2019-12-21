@@ -10,4 +10,22 @@ class JobRepository extends EloquentRepository
     {
         parent::__construct($model);
     }
+
+    /**
+     * Create data entry from array to JSON.
+     *
+     * @param array $params The parameteres for data entry.
+     *
+     * @return array|null
+     */
+    public function create(array $params)
+    {
+    	JobModel::unguard();
+
+        $row = parent::create($params);
+
+        JobModel::reguard();
+    
+        return $row;
+    }
 }

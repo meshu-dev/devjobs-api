@@ -91,6 +91,17 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'host'     => env('DB_HOST', 'devjobs-db'),
+            'port'     => env('DB_PORT', 27017),
+            'database' => env('DB_DATABASE', 'devjobs-dev'),
+            'username' => env('DB_USERNAME', 'devjobs-api'),
+            'password' => env('DB_PASSWORD', 'devjobs-api'),
+            'options'  => [
+                'database' => 'admin' // sets the authentication database
+            ]
+        ],
     ],
 
     /*
