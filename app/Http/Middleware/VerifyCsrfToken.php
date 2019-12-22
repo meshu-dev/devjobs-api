@@ -22,6 +22,7 @@ class VerifyCsrfToken extends Middleware
         '/job-sites',
         '/job-sites/*',
         '/jobs',
-        '/jobs/*'
+        '/jobs/*',
+        '/auth/*'
     ];
 }
