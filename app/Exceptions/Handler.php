@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 use Illuminate\Auth\AuthenticationException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -48,12 +49,17 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        //return parent::render($request, $exception);
-        return response()->json(['error' => 'Unauthenticated.'], 401);
-    }
+        $statusCode = 500;
 
-    protected function unauthenticated($request, AuthenticationException $exception)
-    {
-        return response()->json(['error' => 'Unauthenticated.'], 401);
+        if ($exception instanceof UnauthorizedHttpException) {
+            $statusCode = 401;
+        }
+
+        return response()->json(
+            [
+                'error' => $exception->getMessage()
+            ],
+            $statusCode
+        );
     }
 }
