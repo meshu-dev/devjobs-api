@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+/*
 $router->get('/', 'IndexController@index');
 
 $router->post('/job-sites', 'JobSiteController@create');
@@ -22,4 +24,4 @@ $router->post('/jobs', 'JobController@create');
 $router->get('/jobs', 'JobController@readAll');
 $router->get('/jobs/{id}', 'JobController@read');
 $router->put('/jobs/{id}', 'JobController@update');
-$router->delete('/jobs/{id}', 'JobController@delete');
+$router->delete('/jobs/{id}', 'JobController@delete'); */
