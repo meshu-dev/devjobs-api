@@ -2,14 +2,16 @@
 
 namespace App;
 
+use App\Models\UserModel;
+
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Jenssegers\Mongodb\Auth\User as Authenticatable;
+//use Illuminate\Contracts\Auth\MustVerifyEmail;
+//use Jenssegers\Mongodb\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+//use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
-class User extends Authenticatable implements JWTSubject
+class User extends UserModel implements JWTSubject
 {
     use Notifiable;
 

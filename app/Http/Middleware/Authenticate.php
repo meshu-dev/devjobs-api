@@ -21,7 +21,10 @@ class Authenticate extends Middleware
         try {
             parent::authenticate($request, $guards);
         } catch (AuthenticationException $e) {
-            throw new UnauthorizedHttpException('JWTAuth', $e->getMessage());
+            throw new UnauthorizedHttpException(
+                'JWTAuth',
+                'User is unauthorised'
+            );
         }
     }
 }
