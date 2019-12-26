@@ -28,4 +28,13 @@ class JobRepository extends EloquentRepository
     
         return $row;
     }
+
+    public function readByJobIds($jobSiteId, $jobId)
+    {
+        $rows = $this->readAll([
+            'jobSiteId' => $jobSiteId,
+            'jobId' => $jobId
+        ]);
+        return $rows[0] ?? null;
+    }
 }

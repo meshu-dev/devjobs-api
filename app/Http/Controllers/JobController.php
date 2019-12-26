@@ -31,6 +31,25 @@ class JobController extends Controller
     public function create(Request $request)
     {
         $params = $request->all();
+
+        if (empty($params['jobSiteId']) === true ||
+            empty($params['jobId']) === true)
+        {
+            return $this->getResponse(
+                ['message' => 'Job Id and Job Site Id required to create job'],
+                422
+            );
+        }
+
+        $job = $this->repository->readByJobIds($params['jobSiteId'], $params['jobId']);
+
+        if (empty($job) === false) {
+            return $this->getResponse(
+                ['message' => 'Job alredy exists with same Job Site Id and Job Id'],
+                409
+            );
+        }
+
         $row = $this->repository->create($params);
 
         return $this->getResponse($row, 201);
