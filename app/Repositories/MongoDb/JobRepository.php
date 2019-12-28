@@ -2,7 +2,9 @@
 namespace App\Repositories\MongoDb;
 
 use App\Repositories\MongoDb\EloquentRepository;
-use App\Models\JobModel;
+use App\Models\MongoDb\JobModel;
+
+//use MongoDB\BSON\UTCDateTime as MongoDate;
 
 class JobRepository extends EloquentRepository
 {

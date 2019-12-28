@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Models\UserModel;
+use App\Models\MongoDb\UserModel;
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
 

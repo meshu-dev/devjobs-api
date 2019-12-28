@@ -1,7 +1,10 @@
 <?php
-namespace App\Models;
+namespace App\Models\MongoDb;
 
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+
+use MongoDB\BSON\ObjectId as MongoId;
+use MongoDB\BSON\UTCDateTime as MongoDate;
 
 class BaseModel extends Eloquent
 {
@@ -33,5 +36,18 @@ class BaseModel extends Eloquent
         unset($array['_id']);
         
         return ['id' => $this->id] + $array;
+    }
+
+    protected function toMongoId(string $id)
+    {
+        return new MongoId($id);
+    }
+
+    protected function toMongoDate(string $date)
+    {
+        $date = str_replace('/', '-', $date);
+        $dateTimestamp = strtotime($date) * 1000;
+
+        return new MongoDate($dateTimestamp);
     }
 }

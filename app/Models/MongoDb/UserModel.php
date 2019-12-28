@@ -1,5 +1,5 @@
 <?php
-namespace App\Models;
+namespace App\Models\MongoDb;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;

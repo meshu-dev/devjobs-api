@@ -2,7 +2,7 @@
 namespace App\Repositories\MongoDb;
 
 use App\Repositories\MongoDb\EloquentRepository;
-use App\Models\JobSiteModel;
+use App\Models\MongoDb\JobSiteModel;
 
 class JobSiteRepository extends EloquentRepository
 {
