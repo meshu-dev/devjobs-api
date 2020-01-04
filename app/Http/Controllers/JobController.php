@@ -82,7 +82,14 @@ class JobController extends Controller
         $params = $request->all();
         $rows = $this->repository->readAll($params);
 
-        return $this->getResponse($rows);
+        $rowTotal = $this->repository->getTotal($params);
+        $headers = ['X-Total-Count' => $rowTotal];
+
+        return $this->getResponse(
+            $rows,
+            200,
+            $headers
+        );
     }
 
     /**

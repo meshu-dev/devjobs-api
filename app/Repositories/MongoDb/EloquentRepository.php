@@ -123,4 +123,17 @@ abstract class EloquentRepository implements Repository
     {
         return $this->model->destroy($id);
     }
+
+    public function getTotal(array $params = [])
+    {
+        if (empty($params['offset']) === false) {
+            unset($params['offset']);
+        }
+
+        if (empty($params['limit']) === false) {
+            unset($params['limit']);
+        }
+
+        return $this->model->where($params)->count();
+    }
 }
