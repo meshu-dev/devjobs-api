@@ -4,6 +4,8 @@ namespace App\Repositories\MongoDb;
 use App\Repositories\MongoDb\EloquentRepository;
 use App\Models\MongoDb\JobModel;
 
+use MongoDB\BSON\ObjectId as MongoId;
+
 //use MongoDB\BSON\UTCDateTime as MongoDate;
 
 class JobRepository extends EloquentRepository
@@ -34,7 +36,7 @@ class JobRepository extends EloquentRepository
     public function readByJobIds($jobSiteId, $jobId)
     {
         $rows = $this->readAll([
-            'jobSiteId' => $jobSiteId,
+            'jobSiteId' => new MongoId($jobSiteId),
             'jobId' => $jobId
         ]);
         return $rows[0] ?? null;

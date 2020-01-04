@@ -9,6 +9,8 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
  */
 abstract class EloquentRepository implements Repository
 {
+    private const ROW_LIMIT = 20;
+
     protected $model;
 
     /**
@@ -65,7 +67,26 @@ abstract class EloquentRepository implements Repository
     public function readAll(array $params = [])
     {
         $params = $this->model->verifySearchable($params);
-        $rows = $this->model->where($params)->get();
+        
+        if (empty($params['offset']) === false) {
+            $offset = (int) $params['offset'];
+            unset($params['offset']);
+        } else {
+            $offset = 0;
+        }
+
+        if (empty($params['limit']) === false) {
+            $limit = (int) $params['limit'];
+            unset($params['limit']);
+        } else {
+            $limit = self::ROW_LIMIT;
+        }
+
+        $rows = $this->model
+            ->where($params)
+            ->skip($offset)
+            ->take($limit)
+            ->get();
 
         if (empty($rows) === false) {
             return $rows;

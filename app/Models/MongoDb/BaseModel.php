@@ -8,6 +8,10 @@ use MongoDB\BSON\UTCDateTime as MongoDate;
 
 class BaseModel extends Eloquent
 {
+	private const VALID_PARAMS = [
+		'limit',
+		'offset'
+	];
 	protected $primaryKey = '_id';
 	protected $searchable = [];
 
@@ -23,7 +27,10 @@ class BaseModel extends Eloquent
 		$verifiedParams = [];
 
 		foreach ($params as $paramName => $paramValue) {
-			if (in_array($paramName, $this->searchable) === true) {
+			if (
+				in_array($paramName, $this->searchable) === true ||
+				in_array($paramName, self::VALID_PARAMS) === true
+			) {
 				$verifiedParams[$paramName] = $paramValue;
 			}
 		}
