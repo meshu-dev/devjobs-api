@@ -129,7 +129,7 @@ abstract class EloquentRepository implements Repository
         if (empty($params['offset']) === false) {
             unset($params['offset']);
         }
-
+        
         if (empty($params['limit']) === false) {
             unset($params['limit']);
         }
