@@ -68,14 +68,14 @@ abstract class EloquentRepository implements Repository
     {
         $params = $this->model->verifySearchable($params);
         
-        if (empty($params['offset']) === false) {
+        if (isset($params['offset']) === true) {
             $offset = (int) $params['offset'];
             unset($params['offset']);
         } else {
             $offset = 0;
         }
 
-        if (empty($params['limit']) === false) {
+        if (isset($params['limit']) === true) {
             $limit = (int) $params['limit'];
             unset($params['limit']);
         } else {
@@ -126,11 +126,11 @@ abstract class EloquentRepository implements Repository
 
     public function getTotal(array $params = [])
     {
-        if (empty($params['offset']) === false) {
+        if (isset($params['offset']) === true) {
             unset($params['offset']);
         }
         
-        if (empty($params['limit']) === false) {
+        if (isset($params['limit']) === true) {
             unset($params['limit']);
         }
 
