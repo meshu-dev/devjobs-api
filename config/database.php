@@ -99,7 +99,7 @@ return [
             'username' => env('DB_USERNAME', 'devjobs-api'),
             'password' => env('DB_PASSWORD', 'devjobs-api'),
             'options'  => [
-                'database' => 'admin' // sets the authentication database
+                'database' => env('DB_AUTH_DATABASE', 'admin') // sets the authentication database
             ]
         ],
     ],
