@@ -10,7 +10,8 @@ class BaseModel extends Eloquent
 {
 	private const VALID_PARAMS = [
 		'limit',
-		'offset'
+		'offset',
+		'order'
 	];
 	protected $primaryKey = '_id';
 	protected $searchable = [];

@@ -45,7 +45,7 @@ class JobController extends Controller
 
         if (empty($job) === false) {
             return $this->getResponse(
-                ['message' => 'Job alredy exists with same Job Site Id and Job Id'],
+                ['message' => 'Job already exists with same Job Site Id and Job Id'],
                 409
             );
         }

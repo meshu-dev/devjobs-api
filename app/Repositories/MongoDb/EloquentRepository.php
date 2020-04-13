@@ -82,10 +82,20 @@ abstract class EloquentRepository implements Repository
             $limit = self::ROW_LIMIT;
         }
 
+        if (isset($params['order']) === true) {
+            $orderField = key($params['order']);
+            $sort = current($params['order']);
+            unset($params['order']);
+        } else {
+            $orderField = '_id';
+            $sort = 'desc';
+        }
+
         $rows = $this->model
             ->where($params)
             ->skip($offset)
             ->take($limit)
+            ->orderBy($orderField, $sort)
             ->get();
 
         if (empty($rows) === false) {
@@ -132,6 +142,10 @@ abstract class EloquentRepository implements Repository
         
         if (isset($params['limit']) === true) {
             unset($params['limit']);
+        }
+
+        if (isset($params['order']) === true) {
+            unset($params['order']);
         }
 
         return $this->model->where($params)->count();
