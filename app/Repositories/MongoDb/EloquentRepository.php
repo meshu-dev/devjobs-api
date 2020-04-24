@@ -136,6 +136,8 @@ abstract class EloquentRepository implements Repository
 
     public function getTotal(array $params = [])
     {
+        $params = $this->model->verifySearchable($params);
+        
         if (isset($params['offset']) === true) {
             unset($params['offset']);
         }

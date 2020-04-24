@@ -28,11 +28,14 @@ class BaseModel extends Eloquent
 		$verifiedParams = [];
 
 		foreach ($params as $paramName => $paramValue) {
-			if (
-				in_array($paramName, $this->searchable) === true ||
-				in_array($paramName, self::VALID_PARAMS) === true
-			) {
+			if (in_array($paramName, self::VALID_PARAMS) === true) {
 				$verifiedParams[$paramName] = $paramValue;
+			}
+			if (in_array($paramName, $this->searchable) === true) {
+				if ($paramValue === 'true' || $paramValue === 'false') {
+					$paramValue = filter_var($paramValue, FILTER_VALIDATE_BOOLEAN);
+				}
+				$verifiedParams[] = [$paramName, $paramValue];
 			}
 		}
 		return $verifiedParams;

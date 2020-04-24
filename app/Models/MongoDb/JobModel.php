@@ -6,7 +6,8 @@ class JobModel extends BaseModel
     protected $collection = 'jobs';
     protected $searchable = [
     	'jobId',
-    	'jobSiteId'
+    	'jobSiteId',
+        'isFavourited'
     ];
 
     public function create($data)
