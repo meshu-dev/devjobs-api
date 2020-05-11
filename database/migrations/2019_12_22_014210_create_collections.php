@@ -26,14 +26,8 @@ class CreateCollections extends Migration
         });
 
         Schema::create('jobs', function (Blueprint $collection) {
-
+            // No columns defined
         });
-
-        User::create([
-            'name' => 'Test',
-            'email' => 'test@gmail.com',
-            'password' => Hash::make('12345')
-        ]);
     }
 
     /**
