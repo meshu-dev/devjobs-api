@@ -24,7 +24,7 @@ class JobRepository extends EloquentRepository
      */
     public function create(array $params)
     {
-    	JobModel::unguard();
+        JobModel::unguard();
 
         $row = parent::create($params);
 

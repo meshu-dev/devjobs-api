@@ -12,15 +12,15 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function getResponse(
-    	$params,
-    	int $statusCode = 200,
-    	array $headers = []
-   	) {
-    	$response = response()->json($params, $statusCode);
+        $params,
+        int $statusCode = 200,
+        array $headers = []
+    ) {
+        $response = response()->json($params, $statusCode);
 
-    	if (empty($headers) === false) {
-    		$response->withHeaders($headers);
-    	}
-    	return $response;
+        if (empty($headers) === false) {
+            $response->withHeaders($headers);
+        }
+        return $response;
     }
 }

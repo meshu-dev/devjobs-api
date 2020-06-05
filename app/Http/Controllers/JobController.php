@@ -33,8 +33,7 @@ class JobController extends Controller
         $params = $request->all();
 
         if (empty($params['jobSiteId']) === true ||
-            empty($params['jobId']) === true)
-        {
+            empty($params['jobId']) === true) {
             return $this->getResponse(
                 ['message' => 'Job Id and Job Site Id required to create job'],
                 422

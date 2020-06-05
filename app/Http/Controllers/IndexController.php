@@ -13,6 +13,6 @@ class IndexController extends Controller
      */
     public function index()
     {
-    	return $this->getResponse(['time' => time()]);
+        return $this->getResponse(['time' => time()]);
     }
 }
