@@ -29,9 +29,12 @@ brew install mongodb-community
 composer install
 ```
 - Copy the .env.example file to a new file named .env
-- Fill in .env variables in new file
 ```
 cp .env.example .env
+```
+- Fill in .env variables in new file
+```
+vim .env
 ```
 - Generate Laravel app key
 ```
