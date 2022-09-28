@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
+use App\Models\MongoDb\UserModel;
+use Illuminate\Support\Facades\Hash;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -11,6 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $params = [
+            'name' => 'test',
+            'email' => 'test@gmail.com',
+            'password' => Hash::make('12345')
+        ];
+        UserModel::create($params);
     }
 }

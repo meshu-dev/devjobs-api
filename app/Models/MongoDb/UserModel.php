@@ -13,5 +13,12 @@ class UserModel extends BaseModel implements
     AuthorizableContract,
     CanResetPasswordContract
 {
+    protected $collection = 'users';
+    protected $fillable = [
+        'name',
+        'email',
+        'password'
+    ];
+
     use Authenticatable, Authorizable, CanResetPassword;
 }
