@@ -31,7 +31,7 @@ Route::group(
 		    Route::get('/', "$controller@readAll");
 		    Route::get('/{id}', "$controller@read");
 		    Route::put('/{id}', "$controller@update");
-		    Route::delete('/', "$controller@delete");
+		    Route::delete('/{id}', "$controller@delete");
 	    });
 
 	    Route::group(['prefix' => 'jobs'], function () {
@@ -40,7 +40,7 @@ Route::group(
 		    Route::get('/', "$controller@readAll");
 		    Route::get('/{id}', "$controller@read");
 		    Route::put('/{id}', "$controller@update");
-		    Route::delete('/', "$controller@delete");
+		    Route::delete('/{id}', "$controller@delete");
 	    });
 	}
 );
