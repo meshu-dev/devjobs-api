@@ -7,7 +7,7 @@ class UserController {
   }
   async add(req, res) {
     let data = {
-        username: req.body.username,
+        email: req.body.email,
         password: req.body.password,
       },
       user = this.userModel(data);
@@ -43,9 +43,13 @@ class UserController {
   
   async edit(req, res) {
     let data = {
-      username: req.body.username,
-      password: req.body.password,
+      email: req.body.email
     };
+
+    if (req.body.password) {
+      data.password = await bcrypt.hash(req.body.password, 10);
+    }
+
     let user = await this.userModel.findOneAndUpdate(
       {_id: req.params.id},
       {$set: data},
@@ -71,9 +75,9 @@ class UserController {
 
       if (isCorrect === true) {
         let token = jwt.sign(
-          {username: username},
+          { username: username },
           process.env.JWT_PRIVATE_KEY,
-          {expiresIn: '24h'}
+          { expiresIn: '24h' }
         );
 
         let dayInSeconds = 24 * 60 * 60,

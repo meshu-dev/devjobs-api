@@ -1,33 +1,19 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const ObjectId = Schema.ObjectId;
 
 let jobSchema = new Schema(
   {
-    jobId: {
-      type: String,
-      unique: true,
-      required: true,
-    },
     jobSiteId: {
       type: String,
       unique: false,
       required: true,
     },
-    isFavourited: {
+    jobParams: {
       type: Array,
       unique: false,
-      required: false,
-    },
-    date: {
-      type: Number,
-      unique: false,
-      required: false,
-    },
-    expirationDate: {
-      type: Number,
-      unique: false,
-      required: false,
-    },
+      required: true
+    }
   },
   {
     timestamps: true,

@@ -2,6 +2,7 @@ let express = require('express'),
   router = express.Router(),
   JobController = require('../controllers/JobController'),
   jobController = new JobController(
+    require('../models/JobSiteModel'),
     require('../models/JobModel')
   );
 

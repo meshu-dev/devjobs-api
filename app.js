@@ -34,6 +34,9 @@ app.use(function (req, res, next) {
   }
 });
 
+// Parse JSON data in requests
+app.use(express.json());
+
 mongoDb.connect();
 
 // Create and setup routes
@@ -45,7 +48,7 @@ let routePath = './src/routes',
 
 app.use('/', index);
 app.use('/jobs', jobs);
-app.use('/jobsites', jobsites);
+app.use('/job-sites', jobsites);
 app.use('/users', users);
 
 app.listen(port, () => {

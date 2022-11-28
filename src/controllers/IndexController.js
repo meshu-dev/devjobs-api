@@ -1,7 +1,7 @@
 class IndexController {
   index(req, res) {
     res.json({
-      status: 'API is fine',
+      status: 'DevJobs API is running',
     });
   }
 }

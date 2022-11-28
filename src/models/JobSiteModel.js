@@ -3,20 +3,15 @@ const Schema = mongoose.Schema;
 
 let jobSiteSchema = new Schema(
   {
-    jobSiteId: {
-      type: Number,
-      unique: true,
-      required: true,
-    },
     name: {
       type: String,
-      unique: false,
+      unique: true,
       required: true,
     },
     url: {
       type: String,
-      unique: false,
-      required: false,
+      unique: true,
+      required: true,
     },
     searchParams: {
       type: Array,
@@ -34,9 +29,6 @@ jobSiteSchema.set('toJSON', {
 });
 
 jobSiteSchema.options.toJSON.transform = (doc, ret) => {
-  //ret.createdAt = new Date(ret.createdAt).toString();
-  //ret.updatedAt = new Date(ret.updatedAt).toString();
-
   let idObj = {id: ret._id};
   delete ret._id;
 

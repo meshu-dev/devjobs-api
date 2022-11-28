@@ -1,16 +1,27 @@
 class JobController {
-  constructor(jobModel) {
+  constructor(jobSiteModel, jobModel) {
+    this.jobSiteModel = jobSiteModel;
     this.jobModel = jobModel;
   }
   async add(req, res) {
-    const repositories = req.body.repositories.filter(Boolean);
+    const jobSiteId = req.body.jobSiteId;
+    
+    let jobSite = await this.jobSiteModel.find({_id: jobSiteId});
+    jobSite = jobSite[0] ? jobSite[0] : null;
 
-    let data = {
-      title: req.body.title
-    };
-
-    let project = await this.jobModel(data).save();
-    res.json(project);
+    if (jobSite) {
+      let data = {
+        jobSiteId: jobSite.id,
+        jobParams: req.body.jobParams
+      };
+  
+      let job = await this.jobModel(data).save();
+      res.json(job);
+    } else {
+      res.json({
+        error: "Job Site ID doesn't exist"
+      });
+    }
   }
 
   async get(req, res) {
@@ -38,10 +49,8 @@ class JobController {
   }
   
   async edit(req, res) {
-    const repositories = req.body.repositories.filter(Boolean);
-
     let data = {
-      title: req.body.title
+      jobParams: req.body.jobParams
     };
     let project = await this.jobModel.findOneAndUpdate(
       {_id: req.params.id},
