@@ -6,7 +6,7 @@ class JobController {
   async add(req, res) {
     const jobSiteId = req.body.jobSiteId;
     
-    let jobSite = await this.jobSiteModel.find({_id: jobSiteId});
+    let jobSite = await this.jobSiteModel.find({ _id: jobSiteId });
     jobSite = jobSite[0] ? jobSite[0] : null;
 
     if (jobSite) {
@@ -25,7 +25,7 @@ class JobController {
   }
 
   async get(req, res) {
-    let project = await this.jobModel.find({_id: req.params.id});
+    let project = await this.jobModel.find({ _id: req.params.id });
     res.json(project[0] ? project[0] : {});
   }
   
@@ -38,7 +38,7 @@ class JobController {
 
     if (params.sort) {
       let sortFlag = params.sort === 'asc' ? 1 : -1;
-      options.sort = {createdAt: sortFlag};
+      options.sort = { createdAt: sortFlag };
     }
 
     let projects = await this.jobModel.find({}, null, options),
@@ -53,9 +53,9 @@ class JobController {
       jobParams: req.body.jobParams
     };
     let project = await this.jobModel.findOneAndUpdate(
-      {_id: req.params.id},
-      {$set: data},
-      {new: true}
+      { _id: req.params.id },
+      { $set: data },
+      { new: true }
     );
     res.json(project);
   }

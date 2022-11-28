@@ -29,7 +29,7 @@ jobSiteSchema.set('toJSON', {
 });
 
 jobSiteSchema.options.toJSON.transform = (doc, ret) => {
-  let idObj = {id: ret._id};
+  let idObj = { id: ret._id };
   delete ret._id;
 
   return Object.assign({}, idObj, ret);

@@ -28,7 +28,7 @@ jobSchema.options.toJSON.transform = (doc, ret) => {
   ret.createdAt = new Date(ret.createdAt).toString();
   ret.updatedAt = new Date(ret.updatedAt).toString();
 
-  let idObj = {id: ret._id};
+  let idObj = { id: ret._id };
   delete ret._id;
 
   return Object.assign({}, idObj, ret);

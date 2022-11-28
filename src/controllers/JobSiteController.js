@@ -14,7 +14,7 @@ class JobSiteController {
   }
 
   async get(req, res) {
-    let jobSite = await this.jobSiteModel.find({_id: req.params.id});
+    let jobSite = await this.jobSiteModel.find({ _id: req.params.id });
     res.json(jobSite[0] ? jobSite[0] : {});
   }
   
@@ -44,9 +44,9 @@ class JobSiteController {
       searchParams: req.body.searchParams
     };
     let jobSite = await this.jobSiteModel.findOneAndUpdate(
-      {_id: req.params.id},
-      {$set: data},
-      {new: true}
+      { _id: req.params.id },
+      { $set: data },
+      { new: true }
     );
     res.json(jobSite);
   }

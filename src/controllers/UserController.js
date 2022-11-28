@@ -18,7 +18,7 @@ class UserController {
   }
 
   async get(req, res) {
-    let user = await this.userModel.find({_id: req.params.id});
+    let user = await this.userModel.find({ _id: req.params.id });
     res.json(user[0] ? user[0] : {});
   }
   
@@ -51,15 +51,15 @@ class UserController {
     }
 
     let user = await this.userModel.findOneAndUpdate(
-      {_id: req.params.id},
-      {$set: data},
-      {new: true}
+      { _id: req.params.id },
+      { $set: data },
+      { new: true }
     );
     res.json(user);
   }
   
   async delete(req, res) {
-    await this.userModel.findOneAndDelete({_id: req.params.id});
+    await this.userModel.findOneAndDelete({ _id: req.params.id });
     res.json({});
   }
   
@@ -67,7 +67,7 @@ class UserController {
     let username = req.body.username,
       password = req.body.password;
 
-    let users = await this.userModel.find({username: username});
+    let users = await this.userModel.find({ username: username });
 
     if (users[0]) {
       let user = users[0],
