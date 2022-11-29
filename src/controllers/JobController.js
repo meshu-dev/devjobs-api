@@ -12,6 +12,7 @@ class JobController {
 
     if (jobSite) {
       let data = {
+        jobId: req.body.jobId,
         jobSiteId: jobSite.id,
         params: req.body.params,
         date: new Date(req.body.date),
@@ -44,11 +45,21 @@ class JobController {
       options.sort = { createdAt: sortFlag };
     }
 
-    let projects = await this.jobModel.find({}, null, options),
+    const findParams = {};
+
+    if (params['jobId']) {
+      findParams['jobId'] = parseInt(params['jobId']);
+    }
+
+    if (params['jobSiteId']) {
+      findParams['jobSiteId'] = params['jobSiteId'];
+    }
+
+    let jobs = await this.jobModel.find(findParams, null, options),
       total = await this.jobModel.countDocuments({});
 
     res.setHeader('X-Total-Count', total);
-    res.json(projects);
+    res.json(jobs);
   }
   
   async edit(req, res) {

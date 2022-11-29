@@ -30,7 +30,13 @@ class JobSiteController {
       options.sort = {createdAt: sortFlag};
     }
 
-    let jobSites = await this.jobSiteModel.find({}, null, options),
+    const findParams = {};
+
+    if (params['name']) {
+      findParams['name'] = params['name'];
+    }
+
+    let jobSites = await this.jobSiteModel.find(findParams, null, options),
       total = await this.jobSiteModel.countDocuments({});
 
     res.setHeader('X-Total-Count', total);

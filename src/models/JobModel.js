@@ -1,17 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
 
 let jobSchema = new Schema(
   {
+    jobId: {
+      type: Schema.Types.Mixed,
+      required: true
+    },
     jobSiteId: {
       type: String,
-      unique: false,
-      required: true,
+      required: true
     },
     params: {
       type: Array,
-      unique: false,
       required: true
     },
     date: Date,
@@ -24,6 +25,8 @@ let jobSchema = new Schema(
     timestamps: true,
   }
 );
+
+jobSchema.index({ jobId: 1, jobSiteId: 1 }, { unique: true });
 
 jobSchema.set('toJSON', {
   versionKey: false,
