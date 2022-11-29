@@ -9,10 +9,15 @@ let jobSchema = new Schema(
       unique: false,
       required: true,
     },
-    jobParams: {
+    params: {
       type: Array,
       unique: false,
       required: true
+    },
+    date: Date,
+    isFavourited: {
+      type: Boolean,
+      default: false
     }
   },
   {

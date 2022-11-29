@@ -13,7 +13,9 @@ class JobController {
     if (jobSite) {
       let data = {
         jobSiteId: jobSite.id,
-        jobParams: req.body.jobParams
+        params: req.body.params,
+        date: new Date(req.body.date),
+        isFavourited: req.body.isFavourited || false
       };
   
       let job = await this.jobModel(data).save();
@@ -51,7 +53,9 @@ class JobController {
   
   async edit(req, res) {
     let data = {
-      jobParams: req.body.jobParams
+      params: req.body.params,
+      date: new Date(req.body.date),
+      isFavourited: req.body.isFavourited || false
     };
     let project = await this.jobModel.findOneAndUpdate(
       { _id: req.params.id },

@@ -13,11 +13,7 @@ let jobSiteSchema = new Schema(
       unique: true,
       required: true,
     },
-    searchParams: {
-      type: Array,
-      unique: false,
-      required: false,
-    }
+    searchParams: Array
   },
   {
     timestamps: false
