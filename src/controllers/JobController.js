@@ -3,6 +3,7 @@ class JobController {
     this.jobSiteModel = jobSiteModel;
     this.jobModel = jobModel;
   }
+
   async add(req, res) {
     const jobSiteId = req.body.jobSiteId;
     

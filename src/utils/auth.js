@@ -1,9 +1,12 @@
 let jwt = require('jsonwebtoken');
 
 exports.verify = (req, res, next) => {
-  return next();
+  const publicUrls = [
+    '/auth/register',
+    '/auth/login'
+  ];
   
-  if (req.method === 'GET' || req.url === '/users/login') {
+  if (publicUrls.includes(req.url) === true) {
     return next();
   }
 
@@ -35,6 +38,7 @@ exports.verify = (req, res, next) => {
       errMsg = 'Authentication required';
       statusCode = 401;
     }
+
     return errorResponse(res, statusCode, errMsg);
   }
 };

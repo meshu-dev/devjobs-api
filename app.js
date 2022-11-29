@@ -6,6 +6,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoDb = require('./src/utils/mongoDb');
+const tokenAuth = require('./src/utils/auth');
 const port = process.env.APP_PORT || 3000;
 
 // Setup CORS to grant access to frontend website
@@ -37,16 +38,21 @@ app.use(function (req, res, next) {
 // Parse JSON data in requests
 app.use(express.json());
 
+// Run middleware
+app.all('*', tokenAuth.verify);
+
 mongoDb.connect();
 
 // Create and setup routes
 let routePath = './src/routes',
   index = require(routePath + '/index'),
+  auth = require(routePath + '/auth'),
   jobs = require(routePath + '/jobs'),
   jobsites = require(routePath + '/jobsites'),
   users = require(routePath + '/users');
 
 app.use('/', index);
+app.use('/auth', auth);
 app.use('/jobs', jobs);
 app.use('/job-sites', jobsites);
 app.use('/users', users);

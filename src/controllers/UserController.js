@@ -62,42 +62,6 @@ class UserController {
     await this.userModel.findOneAndDelete({ _id: req.params.id });
     res.json({});
   }
-  
-  async login(req, res) {
-    let username = req.body.username,
-      password = req.body.password;
-
-    let users = await this.userModel.find({ username: username });
-
-    if (users[0]) {
-      let user = users[0],
-        isCorrect = await bcrypt.compare(password, user.password);
-
-      if (isCorrect === true) {
-        let token = jwt.sign(
-          { username: username },
-          process.env.JWT_PRIVATE_KEY,
-          { expiresIn: '24h' }
-        );
-
-        let dayInSeconds = 24 * 60 * 60,
-          timestamp = Math.round(Date.now() / 1000),
-          expiryTime = timestamp + dayInSeconds;
-
-        console.log('Login Token: ' + token);
-
-        res.json({
-          token: token,
-          expiryTime: expiryTime,
-        });
-        return;
-      }
-    }
-
-    res.status(403).json({
-      message: 'Username or password is incorrect',
-    });
-  }
 }
 
 module.exports = UserController;
