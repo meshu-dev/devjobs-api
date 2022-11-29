@@ -11,7 +11,7 @@ const port = process.env.APP_PORT || 3000;
 
 // Setup CORS to grant access to frontend website
 app.use(function (req, res, next) {
-  let allowedOrigins = [
+  const allowedOrigins = [
       process.env.APP_FRONTEND_SITE,
       process.env.APP_ADMIN_SITE,
     ],
@@ -59,4 +59,4 @@ app.use('/users', users);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
-})
+});

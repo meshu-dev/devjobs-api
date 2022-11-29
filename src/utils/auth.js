@@ -1,4 +1,4 @@
-let jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
 exports.verify = (req, res, next) => {
   const publicUrls = [
