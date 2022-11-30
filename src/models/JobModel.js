@@ -12,7 +12,7 @@ let jobSchema = new Schema(
       required: true
     },
     params: {
-      type: Array,
+      type: Schema.Types.Mixed,
       required: true
     },
     date: Date,

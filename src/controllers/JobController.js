@@ -42,7 +42,7 @@ class JobController {
 
     if (params.sort) {
       let sortFlag = params.sort === 'asc' ? 1 : -1;
-      options.sort = { createdAt: sortFlag };
+      options.sort = { date: sortFlag };
     }
 
     const findParams = {};
@@ -53,6 +53,10 @@ class JobController {
 
     if (params['jobSiteId']) {
       findParams['jobSiteId'] = params['jobSiteId'];
+    }
+
+    if (params['isFavourited']) {
+      findParams['isFavourited'] = params['isFavourited'];
     }
 
     let jobs = await this.jobModel.find(findParams, null, options),
