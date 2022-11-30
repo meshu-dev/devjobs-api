@@ -9,6 +9,8 @@ const mongoDb = require('./src/utils/mongoDb');
 const tokenAuth = require('./src/utils/auth');
 const port = process.env.APP_PORT || 3000;
 
+console.log('process.env', process.env);
+
 // Setup CORS to grant access to frontend website
 app.use(function (req, res, next) {
   const allowedOrigins = [
