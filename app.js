@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 // Load config params to process.env
-require('dotenv').config();
+const path = require('path'); 
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const express = require('express');
 const app = express();
@@ -9,7 +10,7 @@ const mongoDb = require('./src/utils/mongoDb');
 const tokenAuth = require('./src/utils/auth');
 const port = process.env.APP_PORT || 3000;
 
-console.log('process.env', process.env.env);
+console.log('process.env', process.env);
 
 // Setup CORS to grant access to frontend website
 app.use(function (req, res, next) {
