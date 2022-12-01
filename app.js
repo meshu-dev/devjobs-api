@@ -9,6 +9,7 @@ const app = express();
 const mongoDb = require('./src/utils/mongoDb');
 const tokenAuth = require('./src/utils/auth');
 const port = process.env.APP_PORT || 3000;
+const cors = require('cors');
 
 // Setup CORS to grant access to frontend website
 app.use(function (req, res, next) {
@@ -40,6 +41,7 @@ app.use(function (req, res, next) {
 });
 
 // Parse JSON data in requests
+app.use(cors());
 app.use(express.json());
 
 // Run middleware
