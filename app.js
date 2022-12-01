@@ -47,10 +47,10 @@ const whitelist = [
   process.env.APP_ADMIN_SITE
 ];
 
-const corsHandler = (req, callback) => {
+const corsHandler = (origin, callback) => {
   let corsOptions = { origin: false };
   
-  if (whitelist.indexOf(req.header('Origin')) !== -1) {
+  if (whitelist.indexOf(origin) !== -1) {
     corsOptions = { origin: true };
   }
   
