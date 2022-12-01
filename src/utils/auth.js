@@ -19,6 +19,8 @@ exports.verify = (req, res, next) => {
 
   let token = req.headers['authorization'];
 
+  console.log('token', req.headers['authorization'], req.headers);
+
   if (token === undefined) {
     return errorResponse(res, 401, 'Authentication required');
   }
