@@ -59,6 +59,7 @@ const corsHandler = (req, callback) => {
 
 const corsParams = {
   origin: corsHandler,
+  allowedHeaders: 'Content-Type,Authorization',
   methods: 'GET,HEAD,PUT,POST,DELETE',
   preflightContinue: false,
   optionsSuccessStatus: 204
