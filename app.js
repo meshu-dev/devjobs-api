@@ -18,7 +18,7 @@ app.use(function (req, res, next) {
     ],
     origin = req.headers.origin;
 
-  console.log('process.env.APP_FRONTEND_SITE', process.env.APP_FRONTEND_SITE);
+  console.log('allowedOrigins', allowedOrigins);
   console.log('origin', origin);
 
   if (origin && allowedOrigins.indexOf(origin) > -1) {
