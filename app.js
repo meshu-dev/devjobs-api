@@ -41,24 +41,30 @@ app.use(function (req, res, next) {
   }
 }); */
 
-let whitelist = [
+// Setup CORS to grant access to frontend website
+const whitelist = [
   process.env.APP_FRONTEND_SITE,
   process.env.APP_ADMIN_SITE
 ];
 
-let corsOptionsDelegate = function (req, callback) {
-  let corsOptions;
+const corsHandler = (req, callback) => {
+  let corsOptions = { origin: false };
   
   if (whitelist.indexOf(req.header('Origin')) !== -1) {
-    corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-  } else {
-    corsOptions = { origin: false } // disable CORS for this request
+    corsOptions = { origin: true };
   }
   
-  callback(null, corsOptions) // callback expects two parameters: error and options
-}
+  callback(null, corsOptions);
+};
 
-app.use(cors(corsOptionsDelegate));
+const corsParams = {
+  origin: corsHandler,
+  methods: 'GET,HEAD,PUT,POST,DELETE',
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+};
+
+app.use(cors(corsParams));
 
 // Parse JSON data in requests
 app.use(express.json());
