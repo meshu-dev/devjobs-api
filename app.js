@@ -5,11 +5,11 @@ const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const mongoDb = require('./src/utils/mongoDb');
 const tokenAuth = require('./src/utils/auth');
 const port = process.env.APP_PORT || 3000;
-const cors = require('cors');
 
 // Setup CORS to grant access to frontend website
 /*
