@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken');
 exports.verify = (req, res, next) => {
   const publicUrls = [
     '/auth/register',
-    '/auth/login'
+    '/auth/login',
+    '/'
   ];
   
   if (publicUrls.includes(req.url) === true) {
