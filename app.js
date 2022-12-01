@@ -12,6 +12,7 @@ const port = process.env.APP_PORT || 3000;
 const cors = require('cors');
 
 // Setup CORS to grant access to frontend website
+/*
 app.use(function (req, res, next) {
   const allowedOrigins = [
       process.env.APP_FRONTEND_SITE,
@@ -38,10 +39,11 @@ app.use(function (req, res, next) {
   } else {
     next();
   }
-});
+}); */
+
+app.use(cors());
 
 // Parse JSON data in requests
-app.use(cors());
 app.use(express.json());
 
 // Run middleware
