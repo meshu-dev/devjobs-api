@@ -15,7 +15,7 @@ const port = process.env.APP_PORT || 3000;
 const publicPath = path.join(__dirname, '/public');
 const imgPath = path.join(__dirname, '/public/images');
 
-app.use(express.static(publicPath)); 
+app.use(express.static(publicPath));
 app.use('/images', express.static(imgPath));
 
 // Setup CORS to grant access to frontend website
