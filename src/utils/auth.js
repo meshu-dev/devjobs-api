@@ -7,7 +7,7 @@ exports.verify = (req, res, next) => {
     '/'
   ];
   
-  if (req.url.indexOf('/public') === 0 ||
+  if (req.url.indexOf('/images') !== false ||
     publicUrls.includes(req.url) === true
   ) {
     return next();
@@ -23,7 +23,7 @@ exports.verify = (req, res, next) => {
 
   let token = req.headers['authorization'];
 
-  console.log('token', req.headers['authorization'], req.headers);
+  //console.log('token', req.headers['authorization'], req.headers);
 
   if (token === undefined) {
     return errorResponse(res, 401, 'Authentication required');
