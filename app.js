@@ -12,8 +12,11 @@ const tokenAuth = require('./src/utils/auth');
 const port = process.env.APP_PORT || 3000;
 
 // Setup static urls
-app.use(express.static('public')); 
-app.use('/images', express.static('images'));
+const publicPath = path.join(__dirname, '/public');
+const imgPath = path.join(__dirname, '/public/images');
+
+app.use(express.static(publicPath)); 
+app.use('/images', express.static(imgPath));
 
 // Setup CORS to grant access to frontend website
 const whitelist = [
