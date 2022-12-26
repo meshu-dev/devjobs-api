@@ -7,9 +7,13 @@ exports.verify = (req, res, next) => {
     '/'
   ];
   
-  if (publicUrls.includes(req.url) === true) {
+  if (req.url.indexOf('/public') === 0 ||
+    publicUrls.includes(req.url) === true
+  ) {
     return next();
   }
+
+  console.log('Checked URL', req.url);
 
   let errorResponse = (res, code, msg) => {
     return res.status(code).json({

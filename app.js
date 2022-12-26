@@ -11,6 +11,10 @@ const mongoDb = require('./src/utils/mongoDb');
 const tokenAuth = require('./src/utils/auth');
 const port = process.env.APP_PORT || 3000;
 
+// Setup static urls
+app.use(express.static('public')); 
+app.use('/images', express.static('images'));
+
 // Setup CORS to grant access to frontend website
 const whitelist = [
   process.env.APP_FRONTEND_SITE,
