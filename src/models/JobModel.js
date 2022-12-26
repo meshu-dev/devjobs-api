@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// TODO: Change when integrating another job site
+const defaultThumb = `${process.env.APP_URL}/images/reed-logo.png`;
+
 let jobSchema = new Schema(
   {
     jobId: {
@@ -14,6 +17,10 @@ let jobSchema = new Schema(
     params: {
       type: Schema.Types.Mixed,
       required: true
+    },
+    thumb: {
+      type: String,
+      default: defaultThumb
     },
     date: Date,
     isFavourited: {
