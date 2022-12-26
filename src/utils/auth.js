@@ -7,7 +7,7 @@ exports.verify = (req, res, next) => {
     '/'
   ];
   
-  if (req.url.indexOf('/public') === 0 ||
+  if (req.url.indexOf('/images') === 0 ||
     publicUrls.includes(req.url) === true
   ) {
     return next();
