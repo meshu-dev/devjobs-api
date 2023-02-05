@@ -62,7 +62,9 @@ class JobController {
     let jobs = await this.jobModel.find(findParams, null, options),
       total = await this.jobModel.countDocuments({});
 
+    res.setHeader('Access-Control-Expose-Headers', "X-Total-Count");
     res.setHeader('X-Total-Count', total);
+    
     res.json(jobs);
   }
   
